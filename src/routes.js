@@ -1,4 +1,5 @@
 import PaginaPadrao from 'components/PaginaPadrao'
+import Home from 'components/pages/Home'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 export default function Router() {
@@ -6,7 +7,7 @@ export default function Router() {
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<PaginaPadrao />}>
-                    <Route index element={<div>Home</div>} />
+                    <Route index element={<Home />} />
                 </Route>
             </Routes>
         </BrowserRouter>
