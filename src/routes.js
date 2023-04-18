@@ -1,7 +1,8 @@
 import PaginaPadrao from 'components/PaginaPadrao'
-import Home from 'components/pages/Home'
-import Categoria from 'components/pages/Categoria'
+import Home from 'pages/Home'
+import Categoria from 'pages/Categoria'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Carrinho from 'pages/Carrinho'
 
 export default function Router() {
     return (
@@ -10,6 +11,7 @@ export default function Router() {
                 <Route path='/' element={<PaginaPadrao />}>
                     <Route index element={<Home />} />
                     <Route path='/categoria/:nomeCategoria' element={<Categoria />} />
+                    <Route path='carrinho' element={<Carrinho />} />
                 </Route>
             </Routes>
         </BrowserRouter>
