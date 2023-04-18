@@ -23,7 +23,7 @@ export default function Carrinho() {
                 descricao='Confira produtos que voxê adicionou ao carrinho.'
             />
             <div className={styles.carrinho}>
-                {carrinho.map(item => <Item key={item.id} {...item} /> )}
+                {carrinho.map(item => <Item key={item.id} {...item} carrinho /> )}
                 <div className={styles.total}>
                     <strong>
                         Resumo da compra
