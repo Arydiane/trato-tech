@@ -1,10 +1,12 @@
 import Header from "components/Header";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from './Anuncie.module.scss'
 import Button from "components/Button";
 import { useForm } from 'react-hook-form';
+import { cadastrarItem } from "store/reducers/itens";
 
 export default function Anuncie() {
+    const dispatch = useDispatch()
     const categorias = useSelector(state => state.categorias.map(({ nome, id }) => ({ nome, id })));
     const { register, handleSubmit, formState } = useForm({
         defaultValues: {
@@ -13,8 +15,8 @@ export default function Anuncie() {
     }); 
     const { errors } = formState;
 
-    function cadastrar(parametro) {
-        console.log('parametro', parametro)
+    function cadastrar(data) {
+        dispatch(cadastrarItem(data))
     }
 
     return (
@@ -26,7 +28,7 @@ export default function Anuncie() {
             <form className={styles.formulario} onSubmit={handleSubmit(cadastrar)}>
                 <input 
                     className={ errors.nome ? styles['input-erro'] : "" }                    
-                    {...register('nome', { required: 'O campo nome é obrigatório' })} 
+                    {...register('titulo', { required: 'O campo nome é obrigatório' })} 
                     placeholder="Nome do produto" alt="nome do produto" 
                 />
                 {errors.nome && <span className={styles['mensagem-erro']}> {errors.nome.message} </span>}
@@ -39,7 +41,7 @@ export default function Anuncie() {
                  {errors.descricao && <span className={styles['mensagem-erro']}> {errors.descricao.message} </span>}
                 <input 
                     className={errors.imagem ? styles['input-erro'] : "" }
-                    {...register('imagem', { required: 'O campo imagem é obrigatório' })} 
+                    {...register('foto', { required: 'O campo imagem é obrigatório' })} 
                     placeholder="URL da imagem do produto" 
                     alt="URL da imagem do produto" 
                 />
@@ -58,7 +60,7 @@ export default function Anuncie() {
                 {errors.categoria && <span className={styles['mensagem-erro']}> {errors.categoria.message} </span>}
                 <input 
                     className={errors.preco ? styles['input-erro'] : "" }
-                    {...register('preco', { required: 'O campo preço é obrigatório' })} 
+                    {...register('preco', { required: 'O campo preço é obrigatório', valueAsNumber: true })} 
                     type="number" 
                     placeholder="Preço do produto" 
                 />
