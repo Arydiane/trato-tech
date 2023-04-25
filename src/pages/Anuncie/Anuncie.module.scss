@@ -17,6 +17,7 @@
     select {
         border: none;
         border-radius: 5px;
+        font-size: 20px;
         outline: #1a95F0;
         transition: 0.2s ease-in-out;
         padding: 10px 20px;
@@ -24,5 +25,17 @@
         &:focus {
             outline: 2px solid #1a95F0;
         }
+
+        &:invalid {
+            outline: 2px solid red;
+        }
+    }
+
+    .input-erro {
+        outline: 2px solid red;
+    }
+
+    .mensagem-erro {
+        color: red;
     }
 }
