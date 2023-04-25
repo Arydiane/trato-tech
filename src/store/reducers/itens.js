@@ -238,11 +238,15 @@ const itensSlice = createSlice({
           return item;
         })
       },
-      cadastrarItem: (state, {payload}) => {
+      cadastrarItem: (state, { payload }) => {
         state.push({ ...payload, id: uuid() });
+      }, 
+      mudarItem: (state, { payload }) => {
+        const index = state.findIndex(item => item.id === payload.id); 
+        Object.assign(state[index], payload.item)
       }
     }
 });
 
-export const { mudarFavorito, cadastrarItem } = itensSlice.actions;
+export const { mudarFavorito, cadastrarItem, mudarItem } = itensSlice.actions;
 export default itensSlice.reducer; 
