@@ -1,11 +1,11 @@
 import styles from './Item.module.scss';
-import { AiOutlineHeart, AiFillHeart, AiFillMinusCircle, AiFillPlusCircle, AiOutlineCheck, AiFillEdit } from 'react-icons/ai';
+import { AiOutlineHeart, AiFillHeart, AiFillMinusCircle, AiFillPlusCircle, AiOutlineCheck, AiFillEdit, AiFillCloseCircle } from 'react-icons/ai';
 import { FaCartPlus } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { mudarCarrinho, mudarQuantidade } from 'store/reducers/carrinho';
-import { mudarFavorito, mudarItem } from 'store/reducers/itens';
+import { deletarItem, mudarFavorito, mudarItem } from 'store/reducers/itens';
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import Input from 'components/Input';
 
 const iconeProps = {
@@ -18,7 +18,7 @@ const quantidadeProps = {
     color: '#1875E8'
 }
 
-export default function Item(props) {
+function Item(props) {
 
     const { titulo, foto, preco, descricao, favorito, id, carrinho, quantidade } = props; 
     const [modoDeEdicao, setModoDeEdicao] = useState(false)
@@ -51,6 +51,11 @@ export default function Item(props) {
         <div className={classNames(styles.item, {
             [styles.itemNoCarrinho]: carrinho
         })}>
+            <AiFillCloseCircle 
+                {...iconeProps} 
+                className={`${styles['item-acao']} ${styles['item-deletar']}`} 
+                onClick={() => dispatch(deletarItem(id))}
+            />
             <div className={styles['item-imagem']}>
                 <img src={foto} alt={titulo} />
             </div>
@@ -109,3 +114,5 @@ export default function Item(props) {
         </div>
     )
 }
+
+export default memo(Item);
