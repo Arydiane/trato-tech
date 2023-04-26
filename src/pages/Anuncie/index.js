@@ -6,20 +6,31 @@ import { useForm } from 'react-hook-form';
 import { cadastrarItem } from "store/reducers/itens";
 import { useParams } from "react-router-dom";
 import Input from "components/Input";
+import { useEffect } from "react";
 
 export default function Anuncie() {
     const dispatch = useDispatch()
     const { nomeCategoria = '' } = useParams()
     const categorias = useSelector(state => state.categorias.map(({ nome, id }) => ({ nome, id })));
-    const { register, handleSubmit, formState } = useForm({
+    const { register, handleSubmit, formState, reset } = useForm({
         defaultValues: {
-            categoria: nomeCategoria
+            titulo: '',
+            descricao: '',
+            foto: '',
+            categoria: nomeCategoria,
+            preco: '' 
         }
     }); 
-    const { errors } = formState;
+
+    const { errors, isSubmitSuccessful } = formState;
+
+    useEffect(()=> {
+        reset()
+    }, [isSubmitSuccessful, reset])
 
     function cadastrar(data) {
         dispatch(cadastrarItem(data))
+        alert("Produto cadastrado!")
     }
 
     return (
