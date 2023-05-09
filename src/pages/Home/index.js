@@ -7,6 +7,7 @@ import Button from 'components/Button';
 import { useCallback, useEffect } from 'react';
 import instance from 'common/config/api';
 import { adicionarCategorias } from 'store/reducers/categorias';
+import { adicionarItens } from 'store/reducers/itens';
 
 export default function Home(){
 
@@ -17,11 +18,17 @@ export default function Home(){
     const buscarCategorias = useCallback(async () => {
         const resposta = await instance.get('/categorias');
         dispatch(adicionarCategorias(resposta.data))        
-    }, [dispatch])
+    }, [dispatch]);
+
+    const buscarItens = useCallback(async () => {
+        const resposta = await instance.get('/itens');
+        dispatch(adicionarItens(resposta.data))        
+    }, [dispatch]);
 
     useEffect(() => {
         buscarCategorias();
-    }, [buscarCategorias])
+        buscarItens();
+    }, [buscarCategorias, buscarItens])
 
     return (
         <div>
