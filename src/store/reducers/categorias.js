@@ -7,7 +7,8 @@ const { toast } = createStandaloneToast()
 
 const initialState = [];
 
-export const carregarCategorias = createAction('categorias/carregarCategorias') 
+export const carregarCategorias = createAction('categorias/carregarCategorias')
+export const carregarUmaCategoria = createAction('categorias/carregarUmaCategoria')
 
 export const buscarCategorias = createAsyncThunk(
   'categorias/buscar',
