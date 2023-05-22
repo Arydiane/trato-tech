@@ -37,4 +37,6 @@ export default async function criarTarefa({ fork, dispatch, busca, action, texto
             isClosable: true
            });
     }
+
+    return resposta; 
 }
